@@ -30,6 +30,7 @@ namespace System.CommandLine
             {
                 new SuggestDirective()
             };
+            _executableName = "!";
         }
      
         /// <summary>
@@ -46,7 +47,7 @@ namespace System.CommandLine
         /// The name of the currently running executable.
         /// </summary>
         public static string ExecutableName
-            => _executableName ??= Path.GetFileNameWithoutExtension(ExecutablePath).Replace(" ", "");
+            => _executableName ??throw new ArgumentNullException();
 
         /// <summary>
         /// The path to the currently running executable.
