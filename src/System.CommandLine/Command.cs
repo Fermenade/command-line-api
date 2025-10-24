@@ -30,13 +30,17 @@ namespace System.CommandLine
         private ChildSymbolList<Command>? _subcommands;
         private List<Action<CommandResult>>? _validators;
 
+
         /// <summary>
         /// Initializes a new instance of the Command class.
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, string? description = null) : base(name)
-            => Description = description;
+        public Command(string name, List<ulong> permition,string? description = null) : base(name)
+        {
+            Description = description;
+            Permition = permition;
+        }
 
         /// <summary>
         /// Gets the child symbols.
@@ -255,7 +259,7 @@ namespace System.CommandLine
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <param name="configuration">The configuration on which the parser's grammar and behaviors are based.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public ParseResult Parse(string commandLine, ParserConfiguration? configuration = null)
+        public ParseResult Parse(IUserCommand commandLine, ParserConfiguration? configuration = null)
             => CommandLineParser.Parse(this, commandLine, configuration);
 
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace System.CommandLine
             List<Token> tokens,
             List<Token>? unmatchedTokens,
             List<ParseError>? errors,
-            string? commandLineText = null,
+            IUserCommand? commandLineText = null,
             CommandLineAction? action = null,
             List<CommandLineAction>? preActions = null)
         {
@@ -99,7 +99,7 @@ namespace System.CommandLine
         /// Holds the value of a complete command line input prior to splitting and tokenization, when provided.
         /// </summary>
         /// <remarks>This will not be set when the parser is called from <c>Program.Main</c>. It is primarily used when calculating suggestions via the <c>dotnet-suggest</c> tool.</remarks>
-        internal string? CommandLineText { get; }
+        internal IUserCommand? CommandLineText { get; }
 
         /// <summary>
         /// Gets the list of tokens used on the command line that were not matched by the parser.
@@ -114,7 +114,7 @@ namespace System.CommandLine
             _completionContext ??=
                 CommandLineText is null
                     ? new CompletionContext(this)
-                    : new TextCompletionContext(this, CommandLineText);
+                    : new TextCompletionContext(this, CommandLineText.UserInput);
 
         /// <summary>
         /// Gets the parsed or default value for the specified argument.

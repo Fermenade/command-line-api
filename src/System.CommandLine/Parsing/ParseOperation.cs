@@ -11,7 +11,7 @@ namespace System.CommandLine.Parsing
     {
         private readonly List<Token> _tokens;
         private readonly ParserConfiguration _configuration;
-        private readonly string? _rawInput;
+        private readonly IUserCommand? _rawInput;
         private readonly SymbolResultTree _symbolResultTree;
         private readonly CommandResult _rootCommandResult;
 
@@ -27,7 +27,7 @@ namespace System.CommandLine.Parsing
             Command rootCommand,
             ParserConfiguration configuration,
             List<string>? tokenizeErrors,
-            string? rawInput)
+            IUserCommand? rawInput)
         {
             _tokens = tokens;
             _configuration = configuration;

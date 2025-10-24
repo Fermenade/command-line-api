@@ -29,8 +29,8 @@ namespace System.CommandLine.Parsing
         /// <param name="configuration">The configuration on which the parser's grammar and behaviors are based.</param>
         /// <remarks>The command line string input will be split into tokens as if it had been passed on the command line.</remarks>
         /// <returns>A <see cref="ParseResult"/> providing details about the parse operation.</returns>
-        public static ParseResult Parse(Command command, string commandLine, ParserConfiguration? configuration = null)
-            => Parse(command, SplitCommandLine(commandLine).ToArray(), commandLine, configuration);
+        public static ParseResult Parse(Command command, IUserCommand commandLine, ParserConfiguration? configuration = null)
+            => Parse(command, SplitCommandLine(commandLine.UserInput).ToArray(), commandLine, configuration);
 
         /// <summary>
         /// Splits a string into a sequence of strings based on whitespace and quotation marks.
@@ -138,7 +138,7 @@ namespace System.CommandLine.Parsing
         private static ParseResult Parse(
             Command command,
             IReadOnlyList<string> arguments,
-            string? rawInput,
+            IUserCommand? rawInput,
             ParserConfiguration? configuration)
         {
             if (arguments is null)

@@ -16,7 +16,12 @@ namespace System.CommandLine
         {
             Name = ThrowIfEmptyOrWithWhitespaces(name, nameof(name), allowWhitespace);
         }
-
+        
+        /// <summary>
+        /// List of groups or users to use this command
+        /// </summary>
+        public List<ulong> Permition { get; set; }
+        
         /// <summary>
         /// Gets or sets the description of the symbol.
         /// </summary>
