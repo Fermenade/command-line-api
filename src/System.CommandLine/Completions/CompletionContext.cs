@@ -54,7 +54,7 @@ namespace System.CommandLine.Completions
             Token? lastToken = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive);
 
             string? textToMatch = null;
-            string? rawInput = parseResult.CommandLineText;
+            string? rawInput = parseResult.CommandLineText.UserInput;
 
             if (rawInput is not null)
             {

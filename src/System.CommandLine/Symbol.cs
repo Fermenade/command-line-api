@@ -20,7 +20,7 @@ namespace System.CommandLine
         /// <summary>
         /// List of groups or users to use this command
         /// </summary>
-        public List<ulong> Permition { get; set; }
+        public Guid Permission { get; set; }
         
         /// <summary>
         /// Gets or sets the description of the symbol.

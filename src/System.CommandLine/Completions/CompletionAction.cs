@@ -20,16 +20,19 @@ internal sealed class CompletionAction : SynchronousCommandLineAction
     public override int Invoke(ParseResult parseResult)
     {
         string? parsedValues = parseResult.GetResult(_directive)!.Values.SingleOrDefault();
-        string? rawInput = parseResult.CommandLineText;
+        string? rawInput = parseResult.CommandLineText.UserInput;
 
         int position = !string.IsNullOrEmpty(parsedValues) ? int.Parse(parsedValues) : rawInput?.Length ?? 0;
+        
 
-        var commandLineToComplete = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive)?.Value ?? "";
-
-        var completionParseResult = parseResult.RootCommandResult.Command.Parse(commandLineToComplete, parseResult.Configuration);
+        var commandLineToComplete = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive).Value ?? "";
+        
+        //var completionParseResult = parseResult.RootCommandResult.Command.Parse(commandLineToComplete, parseResult.Configuration);
+        //TODO: check what this change breaks
+        var completionParseResult = parseResult.RootCommandResult.Command.Parse(parseResult.CommandLineText, parseResult.Configuration);
 
         var completions = completionParseResult.GetCompletions(position);
-
+        
         var output = parseResult.InvocationConfiguration.Output;
 
         output.WriteLine(

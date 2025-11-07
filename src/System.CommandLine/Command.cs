@@ -36,10 +36,10 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, List<ulong> permition,string? description = null) : base(name)
+        public Command(string name,string? description = null) : base(name)
         {
             Description = description;
-            Permition = permition;
+            Permission = new Guid("command"+name);
         }
 
         /// <summary>
@@ -262,6 +262,7 @@ namespace System.CommandLine
         public ParseResult Parse(IUserCommand commandLine, ParserConfiguration? configuration = null)
             => CommandLineParser.Parse(this, commandLine, configuration);
 
+        
         /// <inheritdoc />
         public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {

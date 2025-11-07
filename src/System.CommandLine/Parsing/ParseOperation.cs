@@ -98,6 +98,10 @@ namespace System.CommandLine.Parsing
 
             while (More(out TokenType currentTokenType))
             {
+                if (_rawInput.HasAccess(CurrentToken.Symbol.Permission));
+                {
+                    //TODO: Fixme
+                }
                 if (currentTokenType == TokenType.Command)
                 {
                     ParseSubcommand();
